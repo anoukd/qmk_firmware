@@ -2,7 +2,7 @@
     "manufacturer": "Anouk",
     "keyboard_name": "handwired/splitkb/kyria/rev3",
     "maintainer": "Anouk",
-    "bootloader": "atmel-dfu",
+    "bootloader": "caterina",
     "diode_direction": "COL2ROW",
     "features": {
         "bootmagic": true,
@@ -13,8 +13,14 @@
         "nkro": true
     },
     "matrix_pins": {
-        "cols": ["C2", "C2", "C2", "C2", "C2", "C2", "C2", "C2", "C2", "C2", "C2", "C2"],
-        "rows": ["D1", "D1", "D1", "D1"]
+        "rows": ["D4", "C6", "D7", "E6"],
+        "cols": ["F6", "F7", "B1", "B3", "B2", "B6", "B4", "B5"]
+    },
+    "split": {
+        "soft_serial_pin": "D2"
+    },
+    "ws2812": {
+        "pin": "D3"
     },
     "processor": "atmega32u4",
     "url": "",
@@ -24,42 +30,65 @@
         "vid": "0xFEED"
     },
     "layouts": {
-        "LAYOUT_split_3x5_2": {
+        "LAYOUT": {
             "layout": [
-                {"matrix": [0, 0], "x": 0, "y": 0.25},
-                {"matrix": [0, 1], "x": 1, "y": 0.125},
-                {"matrix": [0, 2], "x": 2, "y": 0},
-                {"matrix": [0, 3], "x": 3, "y": 0.125},
-                {"matrix": [0, 4], "x": 4, "y": 0.25},
-                {"matrix": [0, 7], "x": 7, "y": 0.25},
-                {"matrix": [0, 8], "x": 8, "y": 0.125},
-                {"matrix": [0, 9], "x": 9, "y": 0},
-                {"matrix": [0, 10], "x": 10, "y": 0.125},
-                {"matrix": [0, 11], "x": 11, "y": 0.25},
-                {"matrix": [1, 0], "x": 0, "y": 1.25},
-                {"matrix": [1, 1], "x": 1, "y": 1.125},
-                {"matrix": [1, 2], "x": 2, "y": 1},
-                {"matrix": [1, 3], "x": 3, "y": 1.125},
-                {"matrix": [1, 4], "x": 4, "y": 1.25},
-                {"matrix": [1, 7], "x": 7, "y": 1.25},
-                {"matrix": [1, 8], "x": 8, "y": 1.125},
-                {"matrix": [1, 9], "x": 9, "y": 1},
-                {"matrix": [1, 10], "x": 10, "y": 1.125},
-                {"matrix": [1, 11], "x": 11, "y": 1.25},
-                {"matrix": [2, 0], "x": 0, "y": 2.25},
-                {"matrix": [2, 1], "x": 1, "y": 2.125},
-                {"matrix": [2, 2], "x": 2, "y": 2},
-                {"matrix": [2, 3], "x": 3, "y": 2.125},
-                {"matrix": [2, 4], "x": 4, "y": 2.25},
-                {"matrix": [2, 7], "x": 7, "y": 2.25},
-                {"matrix": [2, 8], "x": 8, "y": 2.125},
-                {"matrix": [2, 9], "x": 9, "y": 2},
-                {"matrix": [2, 10], "x": 10, "y": 2.125},
-                {"matrix": [2, 11], "x": 11, "y": 2.25},
-                {"matrix": [3, 3], "x": 3.5, "y": 3.25},
-                {"matrix": [3, 4], "x": 4.5, "y": 3.5},
-                {"matrix": [3, 6], "x": 6.5, "y": 3.5},
-                {"matrix": [3, 7], "x": 7.5, "y": 3.25}
+                {"label": "KC_ESC", "matrix": [0, 0], "x": 0, "y": 0.75},
+                {"label": "KC_Q", "matrix": [0, 1], "x": 1, "y": 0.75},
+                {"label": "KC_W", "matrix": [0, 2], "x": 2, "y": 0.25},
+                {"label": "KC_E", "matrix": [0, 3], "x": 3, "y": 0},
+                {"label": "KC_R", "matrix": [0, 4], "x": 4, "y": 0.25},
+                {"label": "KC_T", "matrix": [0, 5], "x": 5, "y": 0.5},
+
+                {"label": "KC_Y", "matrix": [4, 2], "x": 10.5, "y": 0.5},
+                {"label": "KC_U", "matrix": [4, 3], "x": 11.5, "y": 0.25},
+                {"label": "KC_I", "matrix": [4, 4], "x": 12.5, "y": 0},
+                {"label": "KC_O", "matrix": [4, 5], "x": 13.5, "y": 0.25},
+                {"label": "KC_P", "matrix": [4, 6], "x": 14.5, "y": 0.75},
+                {"label": "KC_DEL", "matrix": [4, 7], "x": 15.5, "y": 0.75},
+
+                {"label": "KC_TAB", "matrix": [1, 0], "x": 0, "y": 1.75},
+                {"label": "KC_A", "matrix": [1, 1], "x": 1, "y": 1.75},
+                {"label": "KC_S", "matrix": [1, 2], "x": 2, "y": 1.25},
+                {"label": "KC_D", "matrix": [1, 3], "x": 3, "y": 1},
+                {"label": "KC_F", "matrix": [1, 4], "x": 4, "y": 1.25},
+                {"label": "KC_G", "matrix": [1, 5], "x": 5, "y": 1.5},
+
+                {"label": "KC_H", "matrix": [5, 2], "x": 10.5, "y": 1.5},
+                {"label": "KC_J", "matrix": [5, 3], "x": 11.5, "y": 1.25},
+                {"label": "KC_K", "matrix": [5, 4], "x": 12.5, "y": 1},
+                {"label": "KC_L", "matrix": [5, 5], "x": 13.5, "y": 1.25},
+                {"label": "KC_QUOT", "matrix": [5, 6], "x": 14.5, "y": 1.75},
+                {"label": "KC_BSPC", "matrix": [5, 7], "x": 15.5, "y": 1.75},
+
+                {"label": "KC_LSFT", "matrix": [2, 0], "x": 1, "y": 2.75},
+                {"label": "KC_Y", "matrix": [2, 1], "x": 1, "y": 2.75},
+                {"label": "KC_X", "matrix": [2, 2], "x": 2, "y": 2.25},
+                {"label": "KC_C", "matrix": [2, 3], "x": 3, "y": 2},
+                {"label": "KC_V", "matrix": [2, 4], "x": 4, "y": 2.25},
+                {"label": "KC_B", "matrix": [2, 5], "x": 5, "y": 2.5},
+                {"label": "KC_BSLS", "matrix": [2, 6], "x": 6, "y": 3},
+                {"label": "KC_GRV", "matrix": [2, 7], "x": 7, "y": 3.25},
+
+                {"label": "KC_LPRN", "matrix": [6, 0], "x": 8.5, "y": 3.25},
+                {"label": "KC_RPRN", "matrix": [6, 1], "x": 9.5, "y": 3},
+                {"label": "KC_N", "matrix": [6, 2], "x": 10.5, "y": 2.5},
+                {"label": "KC_M", "matrix": [6, 3], "x": 11.5, "y": 2.25},
+                {"label": "KC_COMM", "matrix": [6, 4], "x": 12.5, "y": 2},
+                {"label": "KC_DOT", "matrix": [6, 5], "x": 13.5, "y": 2.25},
+                {"label": "KC_SCLN", "matrix": [6, 6], "x": 14.5, "y": 2.75},
+                {"label": "KC_CAPS", "matrix": [6, 7], "x": 15.5, "y": 2.75},
+
+                {"label": "KC_LCTL", "matrix": [3, 3], "x": 2.5, "y": 3.25},
+                {"label": "KC_LGUI", "matrix": [3, 4], "x": 3.5, "y": 3.25},
+                {"label": "KC_LALT", "matrix": [3, 5], "x": 4.5, "y": 3.5},
+                {"label": "KC_SPC", "matrix": [3, 6], "x": 5.5, "y": 4},
+                {"label": "MO(1)", "matrix": [3, 7], "x": 6.5, "y": 4.25},
+
+                {"label": "MO(2)", "matrix": [7, 0], "x": 9, "y": 4.25},
+                {"label": "SC_SENT", "matrix": [7, 1], "x": 10, "y": 4},
+                {"label": "KC_MINS", "matrix": [7, 2], "x": 11, "y": 3.5},
+                {"label": "KC_EXLM", "matrix": [7, 3], "x": 12, "y": 3.25},
+                {"label": "KC_SLSH", "matrix": [7, 4], "x": 13, "y": 3.25}
             ]
         }
     }
