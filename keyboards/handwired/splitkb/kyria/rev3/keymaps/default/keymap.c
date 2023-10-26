@@ -19,6 +19,7 @@ enum custom_keycodes {
 #define ALT_S MT(MOD_LALT, KC_S)
 #define CTL_D MT(MOD_LCTL, KC_D)
 #define SFT_F MT(MOD_LSFT, KC_F)
+#define GUI_G MT(MOD_LGUI, KC_G)
 #define GUI_SCLN MT(MOD_LGUI, KC_SCLN)
 #define ALT_L MT(MOD_LALT, KC_L)
 #define CTL_K MT(MOD_LCTL, KC_K)
@@ -32,19 +33,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | ESC    |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  BSPC  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * | TAB    |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ENT   |
- * | TAB    |  GUI |  ALT | CTL  |  SFT |   G  |                              |   H  |  SFT |  CTL | ALT  | GUI  |        |
+ * | TAB    |  GUI |  ALT | CTL  |  SFT |  GUI |                              |   H  |  SFT |  CTL | ALT  | GUI  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LCTL   |   Z  |   X  |   C  |   V  |   B  |RGBTOG|RGBMOD|  | VOLD | VOLU |   N  |   M  | ,  < | . >  | /  ? |  DEL   |
  * `----------------------+------+------+------+------+      |  |------+------+------+------+------+----------------------'
- *                        | ADJ  | Alt  |      |      | Enter|  | GUI  | Space|      | Tab  | AltGr|
- *                        |      |      | Lower| Shift| Alt  |  |      | Nav  | Raise|      |      |
+ *                        | ADJ  | Alt  |      |      | GUI+ |  | ALT+ | Space|      | Tab  | AltGr|
+ *                        |      |      | Lower| Shift| Alt  |  | CTL  | Nav  | Raise|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [QWERTY] = LAYOUT(
       KC_ESC,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                                                   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-      KC_TAB,  GUI_A,  ALT_S,  CTL_D,  SFT_F,  KC_G,                                                                   KC_H,    SFT_J,   CTL_K,   ALT_L,   GUI_SCLN, KC_ENT,
+      KC_TAB,  GUI_A,  ALT_S,  CTL_D,  SFT_F,  GUI_G,                                                                  KC_H,    SFT_J,   CTL_K,   ALT_L,   GUI_SCLN, KC_ENT,
       KC_LCTL, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,    RGB_TOG, RGB_MOD,                           KC_VOLD, KC_VOLU,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
-              MO(ADJUST), KC_LALT, MO(LOWER), KC_LSFT, MT(MOD_LALT, KC_ENT),    KC_RGUI, LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
+              MO(ADJUST), KC_LALT, MO(LOWER), KC_LSFT, LGUI(KC_LALT),    LALT(KC_LCTL), LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
     ),
 /*
  * Lower Layer: Numpad, Media
@@ -70,27 +71,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Raise Layer: Symbols
  * TODO: make more similar to normal keyboard layout?
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |  !   |  @   |  {   |  }   |  |   |                              |      |  _   |  €   |      |      |  \     |
+ * |        |  !   |  @   |  {   |  }   |  |   |                              |      |  _   |  €   |  *   |      |  \     |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  #   |  $   |  (   |  )   |  `   |                              |   +  |  -   |  /   |  *   |  %   |  ' "   |
+ * |        |  #   |  $   |  (   |  )   |  `   |                              |   +  |  -   |  /   |  =   |  >   |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |  %   |  ^   |  [   |  ]   |  ~   |      |      |  |      |      |   &  |  =   |  ,   |  .   |  / ? | - _    |
+ * |        |  %   |  ^   |  [   |  ]   |  ~   |      |      |  |      |      |   &  |  =   |  <   |  >   |  / ? | - _    |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      | Lower|      |      |  |      | Nav  | Raise|      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [RAISE] = LAYOUT(
-      _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE,                                     _______, KC_UNDS, ALGR(KC_5),_______,_______,KC_BSLS,
-      _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_PLUS, KC_MINS, KC_SLSH, KC_ASTR, KC_PERC, KC_QUOT,
-      _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, _______, _______, _______, _______, KC_AMPR, KC_EQL,  KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+      _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE,                                     _______, KC_UNDS, ALGR(KC_5),KC_ASTR,_______,KC_BSLS,
+      _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_PLUS, KC_MINS, KC_SLSH, KC_EQL,  KC_GT,   KC_QUOT,
+      _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, _______, _______, _______, _______, KC_AMPR, KC_EQL,  KC_LT,   KC_GT,   KC_SLSH, KC_MINS,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 /*
  * Navigation Layer
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |      |      |      |                              | PgUp |      | Up   |      |      | ScrlLk |
+ * |        |      |      |      |      |      |                              | PgUp |      |      |      |      | ScrlLk |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |                              | PgDn | Left | Down | UP   | Right| CapsLk |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|

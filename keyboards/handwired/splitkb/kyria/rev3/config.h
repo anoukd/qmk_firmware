@@ -6,7 +6,7 @@
 // Always plug in left side of keyboard, this is master
 #define MASTER_LEFT
 
-#define TAPPING_TERM 250
+#define TAPPING_TERM 220
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
