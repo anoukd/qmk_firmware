@@ -5,10 +5,12 @@
 
 enum layers {
     QWERTY = 0,
+    _DVORAK,
+    _COLEMAK_DH,
     LOWER,
     RAISE,
     NAV,
-    ADJUST
+    ADJUST,
 };
 
 enum custom_keycodes {
@@ -46,6 +48,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,  GUI_A,  ALT_S,  CTL_D,  SFT_F,  GUI_G,                                                                  KC_H,    SFT_J,   CTL_K,   ALT_L,   GUI_SCLN, KC_ENT,
       KC_LCTL, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,    RGB_TOG, RGB_MOD,                           KC_VOLD, KC_VOLU,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_DEL,
               MO(ADJUST), KC_LALT, MO(LOWER), KC_LSFT, LGUI(KC_LALT),    LALT(KC_LCTL), LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
+    ),
+/*
+ * Base Layer: Dvorak
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |  Tab   | ' "  | , <  | . >  |   P  |   Y  |                              |   F  |   G  |   C  |   R  |   L  |  Bksp  |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |Ctrl/Esc|   A  |   O  |   E  |   U  |   I  |                              |   D  |   H  |   T  |   N  |   S  |Ctrl/- _|
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LShift | ; :  |   Q  |   J  |   K  |   X  | [ {  |CapsLk|  |F-keys|  ] } |   B  |   M  |   W  |   V  |   Z  | RShift |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
+ *                        |      |      | Enter|      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_DVORAK] = LAYOUT(
+     KC_ESC  ,KC_QUOTE,KC_COMM,  KC_DOT,   KC_P ,   KC_Y ,                                        KC_F,   KC_G ,  KC_C ,   KC_R ,  KC_L , KC_BSPC,
+     KC_TAB , KC_A ,  KC_O   ,  KC_E  ,   KC_U ,   KC_I ,                                        KC_D,   KC_H ,  KC_T ,   KC_N ,  KC_S , KC_ENT,
+     KC_LCTL ,KC_SCLN, KC_Q   ,  KC_J  ,   KC_K ,   KC_X ,RGB_TOG, RGB_MOD,                      KC_VOLD, KC_VOLU, KC_B,   KC_M ,  KC_W ,   KC_V ,  KC_Z , KC_DEL,
+                    MO(ADJUST), KC_LALT, MO(LOWER), KC_LSFT, LGUI(KC_LALT),    LALT(KC_LCTL), LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
+    ),
+/*
+ * Base Layer: Colemak DH
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |  Tab   |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  | ;  : |  Bksp  |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |Ctrl/Esc|   A  |   R  |   S  |   T  |   G  |                              |   M  |   N  |   E  |   I  |   O  |Ctrl/' "|
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LShift |   Z  |   X  |   C  |   D  |   V  | [ {  |CapsLk|  |F-keys|  ] } |   K  |   H  | ,  < | . >  | /  ? | RShift |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
+ *                        |      |      | Enter|      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_COLEMAK_DH] = LAYOUT(
+     KC_ESC  , KC_Q ,  KC_W   ,  KC_F  ,   KC_P ,   KC_B ,                                        KC_J,   KC_L ,  KC_U ,   KC_Y ,KC_SCLN, KC_BSPC,
+     KC_TAB , KC_A ,  KC_R   ,  KC_S  ,   KC_T ,   KC_G ,                                        KC_M,   KC_N ,  KC_E ,   KC_I ,  KC_O , KC_ENT,
+     KC_LCTL , KC_Z ,  KC_X   ,  KC_C  ,   KC_D ,   KC_V , RGB_TOG, RGB_MOD,                     KC_VOLD, KC_VOLU, KC_K,   KC_H ,KC_COMM, KC_DOT ,KC_SLSH, KC_DEL,
+                    (ADJUST), KC_LALT, MO(LOWER), KC_LSFT, LGUI(KC_LALT),    LALT(KC_LCTL), LT(NAV, KC_SPC), MO(RAISE), KC_TAB, KC_RALT
     ),
 /*
  * Lower Layer: Numpad, Media
@@ -111,20 +153,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Adjust Layer
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |      |      |      |                              |      | F7   | F8   | F9   | F10  |        |
+ * |        |      |      |      |      |QWERTY|                              |      | F7   | F8   | F9   | F10  |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      | SAI  | HUI  | VAI  |      |                              |      | F4   | F5   | F6   | F11  |        |
+ * |        |      | SAI  | HUI  | VAI  |DVORAK|                              |      | F4   | F5   | F6   | F11  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      | SAD  | HUD  | VAD  |      |      |      |  |      |      |      | F1   | F2   | F3   | F12  |        |
+ * |        |      | SAD  | HUD  | VAD  |COLMAK|      |      |  |      |      |      | F1   | F2   | F3   | F12  |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [ADJUST] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
-      _______, _______, RGB_SAI, RGB_HUI, RGB_VAI, _______,                                     _______, KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______,
-      _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, _______, _______, _______, _______, _______, _______, KC_F1,   KC_F2,   KC_F3,   KC_F12,  _______,
+      _______, _______, _______, _______, _______, DF(QWERTY),                                     _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
+      _______, _______, RGB_SAI, RGB_HUI, RGB_VAI, DF(_DVORAK),                                     _______, KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______,
+      _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, DF(_COLEMAK_DH), _______, _______, _______, _______, _______, KC_F1,   KC_F2,   KC_F3,   KC_F12,  _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 // /*
